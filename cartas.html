@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gustavo Thyers · Deck de vídeos</title>
+  <meta name="description" content="Portfólio de Gustavo Thyers, editor de vídeo e motion designer, em formato de cartas colecionáveis.">
+  <meta name="theme-color" content="#C8102E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 44'%3E%3Crect x='1' y='1' width='30' height='42' rx='3' fill='%23C8102E' stroke='%230E0608' stroke-width='2'/%3E%3Ccircle cx='16' cy='22' r='9' fill='none' stroke='%23F5B935' stroke-width='2.5'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/cartas.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="pular" href="#deck">Pular para o deck</a>
+
+  <header class="topo" id="topo">
+    <a class="topo__marca" href="#inicio" data-c="pessoa.nome">Gustavo Thyers</a>
+    <nav class="topo__nav" aria-label="Seções">
+      <a href="#deck">Deck</a>
+      <a href="#contato">Contato</a>
+      <a class="topo__versao" href="index.html" id="link-classico">Versão clássica</a>
+    </nav>
+    <!-- barra de progresso da rolagem, como um HUD de jogo -->
+    <span class="topo__barra" id="topo-barra" aria-hidden="true"></span>
+  </header>
+
+  <!-- linhas de velocidade que aparecem nas bordas quando a rolagem é rápida -->
+  <div class="velocidade" id="velocidade" aria-hidden="true"></div>
+
+  <main>
+    <section class="arena" id="inicio" aria-labelledby="arena-nome">
+      <!-- fundo: linhas de velocidade, meio-tom, brasas e o clarão da entrada -->
+      <div class="arena__raios" aria-hidden="true"></div>
+      <div class="arena__meio-tom" aria-hidden="true"></div>
+      <canvas class="arena__brasas" id="brasas" aria-hidden="true"></canvas>
+      <div class="arena__clarao" aria-hidden="true"></div>
+
+      <div class="arena__texto">
+        <p class="arena__etiqueta" data-c="pessoa.atuacao"></p>
+        <h1 class="arena__nome" id="arena-nome"></h1>
+        <p class="arena__apresentacao" id="arena-apresentacao"></p>
+        <div class="arena__acoes">
+          <a class="botao botao--ouro" href="#deck"><span>Ver o deck</span></a>
+          <a class="botao botao--breu" href="#contato"><span>Contato</span></a>
+        </div>
+        <ul class="arena__ferramentas" id="arena-ferramentas" aria-label="Ferramentas"></ul>
+      </div>
+
+      <div class="arena__mesa">
+        <svg class="anel" viewBox="0 0 400 400" aria-hidden="true">
+          <circle cx="200" cy="200" r="190" class="anel__fora"/>
+          <circle cx="200" cy="200" r="172" class="anel__marcas"/>
+          <circle cx="200" cy="200" r="150" class="anel__dentro"/>
+        </svg>
+        <span class="onda" aria-hidden="true"></span>
+        <span class="onda onda--2" aria-hidden="true"></span>
+        <div class="carta-heroi" id="carta-heroi"></div>
+      </div>
+    </section>
+
+    <div class="divisa" aria-hidden="true"><div class="fita"><div class="fita__trilho" id="fita-1"></div></div></div>
+
+    <section class="deck" id="deck" aria-labelledby="deck-titulo">
+      <div class="deck__cabeca" data-revelar>
+        <h2 class="deck__titulo" id="deck-titulo">Deck</h2>
+        <p class="deck__legenda" id="deck-legenda"></p>
+      </div>
+      <div id="zonas"></div>
+    </section>
+
+    <div class="divisa" aria-hidden="true"><div class="fita fita--ouro"><div class="fita__trilho fita__trilho--reverso" id="fita-2"></div></div></div>
+
+    <section class="contato" id="contato" aria-labelledby="contato-titulo">
+      <div class="contato__raios" aria-hidden="true"></div>
+      <div class="contato__carta" id="contato-carta" data-revelar></div>
+      <!-- o título da seção (contato.chamada) fica no nome da carta -->
+      <div class="contato__texto" data-revelar>
+        <p class="contato__rotulo">Ative esta carta por e-mail</p>
+        <a class="contato__email" id="contato-email"></a>
+        <div class="contato__acoes">
+          <button class="botao botao--ouro" type="button" id="copiar-email"><span>Copiar e-mail</span></button>
+          <span class="contato__aviso" id="copiar-aviso" role="status" aria-live="polite"></span>
+        </div>
+        <ul class="contato__redes" id="contato-redes"></ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <span id="rodape-nome"></span>
+    <a href="#inicio">Voltar ao início</a>
+  </footer>
+
+  <!-- faíscas de clique e de invocação, por cima de tudo -->
+  <canvas class="faiscas" id="faiscas" aria-hidden="true"></canvas>
+
+  <dialog class="player" id="player" aria-labelledby="player-titulo">
+    <div class="player__barra">
+      <h2 class="player__titulo" id="player-titulo"></h2>
+      <button class="player__fechar" type="button" id="player-fechar">Fechar</button>
+    </div>
+    <div class="player__tela" id="player-tela"></div>
+    <div class="player__info" id="player-info"></div>
+  </dialog>
+
+  <noscript><p class="sem-js">Este portfólio precisa de JavaScript para mostrar os trabalhos. Contato: gustavothyers@gmail.com</p></noscript>
+
+  <script src="conteudo.js"></script>
+  <script src="assets/js/cartas.js"></script>
+</body>
+</html>

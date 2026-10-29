@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gustavo Thyers · Edição de vídeo e motion</title>
+  <meta name="description" content="Portfólio de Gustavo Thyers, editor de vídeo e motion designer.">
+  <meta name="theme-color" content="#003A78">
+  <!-- Prévia do link: redes e mensageiros exigem o endereço completo da imagem -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Gustavo Thyers · Edição de vídeo e motion">
+  <meta property="og:description" content="Portfólio de Gustavo Thyers, editor de vídeo e motion designer.">
+  <meta property="og:url" content="https://gustavo-thyers-editor.github.io/">
+  <meta property="og:image" content="https://gustavo-thyers-editor.github.io/midia/compartilhamento.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%23003A78'/%3E%3Cpath d='M0 26 32 18v14H0z' fill='%23EEF1F4'/%3E%3Cpath d='M0 26 32 18' stroke='%23F2B24C' stroke-width='2'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/estilo.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+  <a class="pular" href="#trabalhos">Pular para os trabalhos</a>
+
+  <header class="topo" id="topo">
+    <a class="topo__marca" href="#inicio" data-c="pessoa.nome">Gustavo Thyers</a>
+    <span class="topo__tc" id="topo-tc" aria-hidden="true">00:00:00:00</span>
+    <nav class="topo__nav" aria-label="Seções">
+      <a href="#trabalhos">Trabalhos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <!-- linha do tempo: a cabeça de reprodução acompanha a rolagem -->
+    <div class="topo__linha" aria-hidden="true"><span class="topo__progresso" id="topo-progresso"></span></div>
+  </header>
+
+  <main>
+    <section class="abertura" id="inicio" aria-labelledby="abertura-nome">
+      <div class="abertura__grade" aria-hidden="true"></div>
+      <div class="abertura__foto" id="abertura-foto">
+        <div class="visor" aria-hidden="true">
+          <span class="visor__canto visor__canto--1"></span><span class="visor__canto visor__canto--2"></span>
+          <span class="visor__canto visor__canto--3"></span><span class="visor__canto visor__canto--4"></span>
+          <span class="visor__rec">REC</span>
+          <span class="visor__tc" id="visor-tc">00:00:00:00</span>
+        </div>
+        <span class="etiqueta" id="abertura-etiqueta"></span>
+      </div>
+      <div class="selo-giro" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <defs><path id="circulo" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+          <text><textPath href="#circulo" id="selo-texto"></textPath></text>
+          <path class="selo-giro__play" d="M88 80 L124 100 L88 120 Z"/>
+        </svg>
+      </div>
+      <div class="abertura__feixe" aria-hidden="true"></div>
+      <div class="abertura__conteudo">
+        <h1 class="abertura__nome" id="abertura-nome"></h1>
+        <div class="abertura__texto">
+          <p class="abertura__atuacao" data-c="pessoa.atuacao"></p>
+          <p class="abertura__apresentacao" id="abertura-apresentacao"></p>
+          <a class="botao botao--luz" href="#trabalhos"><span>Ver trabalhos</span><span class="botao__seta" aria-hidden="true"></span></a>
+        </div>
+      </div>
+      <div class="fita" aria-hidden="true"><div class="fita__trilho" id="fita-trilho"></div></div>
+    </section>
+
+    <section class="trabalhos" id="trabalhos" aria-labelledby="trabalhos-titulo">
+      <span class="cruz cruz--te" aria-hidden="true"></span><span class="cruz cruz--td" aria-hidden="true"></span>
+      <div class="trabalhos__cabeca">
+        <h2 class="titulo-largo" id="trabalhos-titulo" data-revelar>Trabalhos</h2>
+        <nav class="indice" aria-label="Categorias de trabalho" data-revelar>
+          <ul id="indice"></ul>
+        </nav>
+      </div>
+      <div id="categorias"></div>
+    </section>
+
+    <section class="sobre" id="sobre" aria-labelledby="sobre-titulo">
+      <span class="cruz cruz--te" aria-hidden="true"></span><span class="cruz cruz--bd" aria-hidden="true"></span>
+      <div class="sobre__foto" id="sobre-foto" data-revelar>
+        <span class="etiqueta etiqueta--sobre" id="sobre-etiqueta"></span>
+      </div>
+      <div class="sobre__texto">
+        <h2 class="titulo-largo" id="sobre-titulo" data-revelar>Sobre mim</h2>
+        <p class="sobre__bio" id="sobre-bio" data-revelar></p>
+        <ul class="sobre__numeros" id="sobre-numeros" data-revelar></ul>
+        <div class="sobre__ficha" id="sobre-ficha" data-revelar></div>
+      </div>
+    </section>
+
+    <section class="contato" id="contato" aria-labelledby="contato-titulo">
+      <div class="fita fita--contato" aria-hidden="true"><div class="fita__trilho fita__trilho--reverso" id="fita-contato"></div></div>
+      <div class="contato__corpo">
+        <div class="contato__conteudo">
+          <div class="contato__caixa" data-revelar>
+            <span class="contato__seta" aria-hidden="true"></span>
+            <div>
+              <h2 class="contato__chamada" id="contato-titulo" data-c="contato.chamada"></h2>
+              <p class="contato__texto" data-c="contato.texto"></p>
+            </div>
+          </div>
+          <a class="contato__email" id="contato-email" data-revelar></a>
+          <div class="contato__acoes">
+            <button class="botao botao--luz" type="button" id="copiar-email">Copiar e-mail</button>
+            <span class="contato__aviso" id="copiar-aviso" role="status" aria-live="polite"></span>
+          </div>
+          <ul class="contato__redes" id="contato-redes"></ul>
+        </div>
+        <div class="contato__foto" id="contato-foto" data-revelar></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <span id="rodape-nome"></span>
+    <a href="#inicio">Voltar ao início</a>
+  </footer>
+
+  <dialog class="player" id="player" aria-labelledby="player-titulo">
+    <div class="player__barra">
+      <h2 class="player__titulo" id="player-titulo"></h2>
+      <button class="player__fechar" type="button" id="player-fechar">Fechar</button>
+    </div>
+    <div class="player__tela" id="player-tela"></div>
+    <div class="player__info" id="player-info"></div>
+  </dialog>
+
+  <!-- corte: varredura de luz ao navegar entre seções -->
+  <div class="corte" id="corte" aria-hidden="true"></div>
+
+  <noscript><p class="sem-js">Este portfólio precisa de JavaScript para mostrar os trabalhos. Contato: gustavothyers@gmail.com</p></noscript>
+
+  <script src="conteudo.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

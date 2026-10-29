@@ -1,0 +1,671 @@
+/* Portfólio Gustavo Thyers — versão em cartas, direção "Duelo" (vermelho, preto e dourado; design original) */
+
+@font-face { font-family: "Dela Gothic One"; src: url("../fonts/delagothicone-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Chakra Petch"; src: url("../fonts/chakrapetch-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Chakra Petch"; src: url("../fonts/chakrapetch-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Chakra Petch"; src: url("../fonts/chakrapetch-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Chakra Petch"; src: url("../fonts/chakrapetch-700-italico.woff2") format("woff2"); font-weight: 700; font-style: italic; font-display: swap; }
+
+/* propriedades registradas para poderem ser animadas (balanço da carta, brilho, luz da borda) */
+@property --rx { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@property --ry { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+@property --mx { syntax: "<percentage>"; inherits: true; initial-value: 50%; }
+@property --my { syntax: "<percentage>"; inherits: true; initial-value: 30%; }
+@property --giro { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+
+:root {
+  --vermelho: #E21C34;      /* a cor principal */
+  --sangue: #C8102E;
+  --vinho: #6E0716;
+  --breu: #0E0608;          /* preto avermelhado */
+  --breu-2: #1C0B0E;
+  --ouro: #F5B935;
+  --ouro-claro: #FFE08A;
+  --branco: #FFF4EC;
+  --rosado: #E8CDD0;        /* texto secundário sobre preto */
+
+  --margem: clamp(1rem, 4vw, 3.5rem);
+  --respiro: clamp(4rem, 9vw, 8rem);
+  --suave: cubic-bezier(.2, .7, .1, 1);
+  --mola: cubic-bezier(.3, 1.45, .5, 1);
+  --golpe: cubic-bezier(.15, .85, .3, 1);
+
+  --titulo: "Dela Gothic One", "Arial Black", sans-serif;
+  --ui: "Chakra Petch", "Arial", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  margin: 0; overflow-x: clip;
+  font-family: var(--ui); font-size: 1.0625rem; line-height: 1.55;
+  color: var(--branco); background: var(--breu);
+}
+img, video { display: block; max-width: 100%; }
+h1, h2, h3, p { margin: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--branco); outline-offset: 4px; }
+
+.pular { position: absolute; left: var(--margem); top: -100px; z-index: 60; background: var(--ouro); color: var(--breu); padding: .6rem 1rem; font-weight: 700; }
+.pular:focus { top: 1rem; }
+.sem-js { padding: 1rem var(--margem); background: var(--ouro); color: var(--breu); }
+
+.selo {
+  display: inline-block; vertical-align: .12em; margin-left: .15em; padding: .1em .55em .15em;
+  background: var(--ouro); color: var(--breu);
+  font-family: var(--ui); font-style: normal; font-size: .72rem; font-weight: 700; line-height: 1.4; white-space: nowrap; text-transform: none; letter-spacing: 0;
+}
+
+/* botões inclinados, com sombra chapada de mangá */
+.botao {
+  position: relative; display: inline-flex; align-items: center; justify-content: center; overflow: hidden;
+  padding: .95rem 1.7rem; border: 0;
+  font: 700 1rem/1 var(--ui); letter-spacing: .06em; text-transform: uppercase; text-decoration: none; cursor: pointer;
+  transform: skewX(-12deg);
+  transition: transform .25s var(--suave), box-shadow .25s var(--suave), background-color .25s;
+}
+.botao > span { display: block; transform: skewX(12deg); }
+.botao--ouro { background: var(--ouro); color: var(--breu); box-shadow: 5px 5px 0 var(--breu); }
+.botao--ouro:hover { background: var(--ouro-claro); }
+.botao--breu { background: var(--breu); color: var(--branco); box-shadow: 5px 5px 0 rgba(14, 6, 8, .35); }
+.botao:hover { transform: skewX(-12deg) translate(-2px, -2px); box-shadow: 8px 8px 0 var(--breu); }
+.botao::after { /* brilho que atravessa ao passar o mouse */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .55) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+
+/* ---------- Topo ---------- */
+
+.topo {
+  position: fixed; inset: 0 0 auto; z-index: 40;
+  display: flex; align-items: center; gap: 1rem; padding: 1rem var(--margem);
+  transition: background-color .35s, padding .35s, box-shadow .35s;
+}
+.topo--rolado { background: rgba(14, 6, 8, .92); backdrop-filter: blur(8px); padding-block: .7rem; box-shadow: 0 3px 0 var(--vermelho); }
+.topo__marca { font: 400 1.05rem/1 var(--titulo); text-transform: uppercase; text-decoration: none; letter-spacing: .02em; }
+.topo__nav { display: flex; gap: clamp(1rem, 2.5vw, 2rem); margin-left: auto; align-items: center; }
+.topo__nav a { font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: .95rem; text-decoration: none; text-underline-offset: .35em; }
+.topo__nav a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.topo__versao { padding: .4rem .85rem; border: 2px solid currentColor; transform: skewX(-12deg); }
+.topo__barra {
+  position: absolute; left: 0; bottom: 0; width: 100%; height: 4px;
+  transform-origin: left; transform: scaleX(var(--p, 0));
+  background: linear-gradient(90deg, var(--vermelho), var(--ouro) 85%, var(--branco));
+  box-shadow: 0 0 12px rgba(245, 185, 53, .8);
+}
+
+/* granulação de filme por cima de tudo, bem sutil */
+body::after {
+  content: ""; position: fixed; inset: -50%; z-index: 90; pointer-events: none; opacity: .08; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* linhas de velocidade nas bordas da tela (opacidade controlada pelo JS conforme a rolagem) */
+.velocidade {
+  position: fixed; inset: 0; z-index: 35; pointer-events: none; opacity: 0;
+  background: repeating-conic-gradient(from 0deg at 50% 50%, rgba(255, 244, 236, .9) 0deg .5deg, transparent .5deg 3.2deg);
+  -webkit-mask-image: radial-gradient(ellipse at center, transparent 0 48%, #000 85%);
+          mask-image: radial-gradient(ellipse at center, transparent 0 48%, #000 85%);
+}
+
+/* cursor: anel dourado que segue o mouse (criado pelo JS só em telas com mouse) */
+.mira {
+  position: fixed; left: 0; top: 0; z-index: 85; pointer-events: none;
+  width: 36px; height: 36px; margin: -18px 0 0 -18px; border-radius: 50%;
+  border: 2px solid var(--ouro); box-shadow: 0 0 14px rgba(245, 185, 53, .7), inset 0 0 8px rgba(245, 185, 53, .5);
+  transition: width .25s var(--suave), height .25s var(--suave), margin .25s var(--suave), background-color .25s, border-color .25s, opacity .25s;
+}
+.mira--alvo { width: 66px; height: 66px; margin: -33px 0 0 -33px; border-color: var(--branco); background: rgba(245, 185, 53, .14); }
+.mira--fora { opacity: 0; }
+
+/* ---------- Arena (abertura vermelha) ---------- */
+
+.arena {
+  position: relative; overflow: clip; isolation: isolate;
+  min-height: 100svh;
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem);
+  padding: clamp(6rem, 12vh, 8rem) var(--margem) calc(var(--respiro) + 1rem);
+  background: radial-gradient(circle at 70% 48%, #FF3A4E 0%, #D3132E 28%, #92091D 62%, #3B0209 100%);
+}
+.arena__raios { /* linhas de velocidade, como num quadro de impacto */
+  position: absolute; left: 70%; top: 48%; z-index: -1; width: 260vmax; height: 260vmax; translate: -50% -50%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 240, 220, .17) 0deg .7deg, transparent .7deg 4.5deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 6%, #000 22%, #000 55%, transparent 72%);
+          mask-image: radial-gradient(circle, transparent 0 6%, #000 22%, #000 55%, transparent 72%);
+}
+.arena__meio-tom {
+  position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(circle, rgba(14, 6, 8, .5) 1.3px, transparent 1.9px) 0 0 / 11px 11px;
+  -webkit-mask-image: linear-gradient(200deg, transparent 45%, #000 95%);
+          mask-image: linear-gradient(200deg, transparent 45%, #000 95%);
+}
+.arena__brasas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.arena__clarao {
+  position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at 70% 48%, rgba(255, 244, 214, .9), rgba(255, 200, 120, .55) 30%, rgba(226, 28, 52, 0) 70%);
+}
+
+.arena__texto { position: relative; z-index: 2; display: grid; gap: 1.4rem; justify-items: start; }
+.arena__etiqueta {
+  padding: .5rem 1.4rem .5rem 1rem; background: var(--breu); color: var(--ouro);
+  font-weight: 700; font-size: .9rem; line-height: 1; letter-spacing: .14em; text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, calc(100% - .8rem) 100%, 0 100%);
+}
+.arena__nome {
+  font: 400 clamp(2.6rem, 7vw, 7.2rem)/.98 var(--titulo); text-transform: uppercase; letter-spacing: .01em;
+  color: var(--branco);
+  text-shadow: .01em .01em 0 var(--breu), .02em .02em 0 var(--breu), .03em .03em 0 var(--breu), .04em .04em 0 var(--breu),
+               .05em .05em 0 var(--breu), .06em .06em 0 var(--breu), .07em .07em 0 var(--breu), .12em .16em .2em rgba(40, 0, 5, .45);
+}
+.arena__nome .palavra { display: block; position: relative; width: fit-content; }
+/* cópias do nome para o brilho que atravessa e para a falha digital (só aparecem com movimento) */
+.arena__nome .palavra::before, .arena__nome .palavra::after {
+  content: attr(data-texto); position: absolute; inset: 0; pointer-events: none; text-shadow: none; display: none;
+}
+.arena__nome .palavra + .palavra { color: var(--ouro-claro); }
+.arena__apresentacao { max-width: 34rem; font-size: clamp(1.05rem, 1.35vw, 1.25rem); }
+.arena__acoes { display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; margin-top: .4rem; }
+.arena__ferramentas { display: flex; flex-wrap: wrap; gap: .5rem; }
+.arena__ferramentas li { padding: .3rem .9rem; background: var(--breu); font-size: .9rem; font-weight: 600; transform: skewX(-12deg); }
+.arena__ferramentas .arena__pendente { background: rgba(14, 6, 8, .55); }
+
+.arena__mesa { position: relative; z-index: 2; display: grid; place-items: center; min-height: min(82svh, 48rem); }
+.anel { position: absolute; width: min(100%, 42rem); aspect-ratio: 1; overflow: visible; pointer-events: none; }
+.anel__fora { fill: none; stroke: rgba(255, 224, 138, .85); stroke-width: 2; }
+.anel__marcas { fill: none; stroke: var(--ouro); stroke-width: 14; stroke-dasharray: 2 16; transform-origin: 200px 200px; }
+.anel__dentro { fill: rgba(14, 6, 8, .22); stroke: rgba(255, 244, 236, .4); stroke-width: 1.5; stroke-dasharray: 12 7; transform-origin: 200px 200px; }
+.onda { position: absolute; width: 22rem; aspect-ratio: 1; border-radius: 50%; border: 3px solid var(--ouro-claro); opacity: 0; pointer-events: none; }
+.carta-heroi {
+  position: relative; width: clamp(320px, 30vw, 390px);
+  filter: drop-shadow(0 30px 40px rgba(40, 0, 5, .65)) drop-shadow(0 0 50px rgba(255, 210, 140, .4));
+}
+.carta-heroi::before { /* aura dourada e vermelha girando atrás da carta */
+  content: ""; position: absolute; inset: -18px; z-index: -1; border-radius: 26px; display: none;
+  background: conic-gradient(from var(--giro), var(--ouro), var(--vermelho), var(--ouro-claro), #FF5566, var(--ouro));
+  filter: blur(22px); opacity: .9;
+}
+
+/* ---------- Faixas diagonais entre as seções ---------- */
+
+.divisa { position: relative; z-index: 6; overflow-x: clip; margin: -2.6rem 0; padding: 1.6rem 0; pointer-events: none; }
+.fita {
+  width: 112%; margin-left: -6%; overflow: hidden; white-space: nowrap;
+  padding: .85rem 0; transform: rotate(-2.2deg);
+  background: var(--breu); color: var(--ouro);
+  border-block: 3px solid var(--ouro); box-shadow: 0 12px 30px rgba(0, 0, 0, .45);
+}
+.fita--ouro { transform: rotate(1.8deg); background: var(--ouro); color: var(--breu); border-color: var(--breu); }
+.fita__trilho { display: inline-flex; font: 400 clamp(1.1rem, 2.2vw, 1.75rem)/1 var(--titulo); text-transform: uppercase; }
+.fita__trilho span { padding-right: .6em; }
+
+/* =========================================================
+   A carta
+   ========================================================= */
+
+.carta {
+  --f1: #FF5566; --f2: #D3132E; --f3: #6E0716; --linha-cor: var(--branco);
+  position: relative; width: 100%; aspect-ratio: 59 / 86;
+  container-type: inline-size;
+  perspective: 1400px; /* profundidade para o giro */
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .5s var(--suave);
+}
+.carta--rubi   { --f1: #FF5566; --f2: #D3132E; --f3: #6E0716; --linha-cor: var(--branco); }
+.carta--onix   { --f1: #5A4347; --f2: #26161A; --f3: #0B0406; --linha-cor: var(--ouro); }
+.carta--ouro   { --f1: #FFE59A; --f2: #E8A92A; --f3: #8A5A0B; --linha-cor: #1A0B05; }
+.carta--carmim { --f1: #C2364F; --f2: #86102A; --f3: #3E030E; --linha-cor: var(--branco); }
+.carta--heroi  { --f1: #FFE59A; --f2: #E21C34; --f3: #4A030C; --linha-cor: var(--branco); }
+
+.carta__miolo { position: absolute; inset: 0; transform-style: preserve-3d; transition: transform .9s var(--suave); }
+.carta__frente, .carta__verso {
+  position: absolute; inset: 0; overflow: hidden; border-radius: 3cqi;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.carta__verso { transform: rotateY(180deg); }
+.carta--virada .carta__verso { transform: none; }
+
+.carta__frente {
+  display: flex; flex-direction: column; gap: 1.5cqi;
+  padding: 4.2cqi 4.4cqi 3.6cqi;
+  background:
+    repeating-linear-gradient(-45deg, rgba(0, 0, 0, .09) 0 1.5cqi, transparent 1.5cqi 3cqi),
+    linear-gradient(160deg, var(--f1), var(--f2) 45%, var(--f3));
+  box-shadow: inset 0 0 0 1cqi var(--breu), inset 0 0 0 1.6cqi rgba(245, 185, 53, .9), inset 0 0 0 2.2cqi var(--breu);
+  font-family: var(--ui); color: var(--branco);
+}
+
+.carta__nome {
+  display: flex; align-items: center; gap: 1.6cqi;
+  padding: 1.4cqi 1.4cqi 1.4cqi 2.6cqi;
+  background: var(--breu); border-left: 1.2cqi solid var(--ouro);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 3cqi 100%, 0 calc(100% - 3cqi));
+}
+.carta__titulo {
+  flex: 1; min-width: 0;
+  font: italic 700 clamp(13px, 6.4cqi, 26px)/1.1 var(--ui); text-transform: uppercase; letter-spacing: .01em;
+  color: var(--branco); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.carta--nome-longo .carta__titulo { font-size: clamp(12px, 5cqi, 20px); line-height: 1.05; white-space: normal; text-wrap: balance; }
+.carta--ultra .carta__titulo { /* nome em folha dourada */
+  background: linear-gradient(100deg, var(--branco) 0%, var(--ouro-claro) 30%, var(--ouro) 50%, var(--branco) 70%) 0 0 / 200% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.carta__atributo { /* hexágono dourado com o play: o "atributo" de quem edita vídeo */
+  flex: none; position: relative; width: 8.6cqi; aspect-ratio: 1;
+  background: radial-gradient(circle at 35% 30%, #FFF0B8, var(--ouro) 45%, #9A6510);
+  clip-path: polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0 50%);
+}
+.carta__atributo::after { content: ""; position: absolute; inset: 29% 25% 29% 36%; background: var(--breu); clip-path: polygon(0 0, 100% 50%, 0 100%); }
+
+.carta__linha {
+  display: flex; justify-content: flex-end; align-items: center; min-height: 6cqi; padding-inline: .6cqi;
+  font: 700 clamp(11.5px, 3.8cqi, 15px)/1.1 var(--ui); text-transform: uppercase; letter-spacing: .06em;
+  color: var(--linha-cor); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.carta__estrelas { display: flex; gap: .9cqi; }
+.estrela { position: relative; width: 6.2cqi; aspect-ratio: 1; border-radius: 50%; background: var(--breu); box-shadow: 0 0 0 .35cqi var(--ouro); }
+.estrela::after {
+  content: ""; position: absolute; inset: 13%;
+  background: radial-gradient(circle at 40% 35%, #FFF3C4, var(--ouro) 60%);
+  clip-path: polygon(50% 0, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+
+.carta__arte {
+  position: relative; flex: 1 1 auto; min-height: 18cqi;
+  background: linear-gradient(135deg, var(--ouro-claro), var(--ouro) 50%, #8A5A0B);
+  clip-path: polygon(0 0, calc(100% - 6cqi) 0, 100% 6cqi, 100% 100%, 6cqi 100%, 0 calc(100% - 6cqi));
+}
+.carta__arte > img, .carta__arte > video, .cartela {
+  position: absolute; inset: .9cqi; width: calc(100% - 1.8cqi); height: calc(100% - 1.8cqi);
+  object-fit: cover; object-position: 50% 22%; background: var(--breu);
+  clip-path: polygon(0 0, calc(100% - 5.4cqi) 0, 100% 5.4cqi, 100% 100%, 5.4cqi 100%, 0 calc(100% - 5.4cqi));
+}
+.carta__arte::after { /* meio-tom no canto da arte */
+  content: ""; position: absolute; inset: .9cqi; z-index: 1; pointer-events: none;
+  background: radial-gradient(circle, rgba(14, 6, 8, .6) .5cqi, transparent .8cqi) 0 0 / 2.4cqi 2.4cqi;
+  -webkit-mask-image: linear-gradient(315deg, #000 0%, transparent 32%);
+          mask-image: linear-gradient(315deg, #000 0%, transparent 32%);
+}
+.cartela {
+  display: grid; place-items: center; padding: 6cqi; text-align: center;
+  background: radial-gradient(circle at 50% 40%, #E21C34, #5A0410 75%);
+  font: 400 clamp(14px, 7cqi, 28px)/1.05 var(--titulo); text-transform: uppercase; color: var(--branco);
+  text-shadow: .06em .06em 0 var(--breu);
+}
+
+.carta__codigo {
+  margin-top: -.4cqi; text-align: right;
+  font: 700 clamp(11.5px, 3.2cqi, 13px)/1 var(--ui); letter-spacing: .08em; color: var(--linha-cor);
+}
+
+.carta__texto {
+  flex: none; display: grid; gap: .9cqi; align-content: start; min-height: 22cqi;
+  padding: 2cqi 2.6cqi 1.8cqi;
+  background: linear-gradient(180deg, rgba(14, 6, 8, .93), rgba(32, 8, 13, .93));
+  border-left: 1.2cqi solid var(--ouro);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4cqi), calc(100% - 4cqi) 100%, 0 100%);
+  font-size: clamp(11.5px, 3.45cqi, 14px); line-height: 1.3; color: #F3E3E5;
+}
+.carta__tipo { font-weight: 700; text-transform: uppercase; letter-spacing: .03em; color: var(--ouro); }
+.carta__efeito { text-wrap: pretty; }
+.carta__efeito strong { font-weight: 600; color: var(--ouro-claro); }
+.carta__efeito .selo { font-size: 11.5px; }
+.slot .carta__efeito { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.carta__stats {
+  display: flex; flex-wrap: wrap; justify-content: space-between; gap: .2em .8em;
+  margin-top: .5cqi; padding: 1cqi 3cqi 1cqi 2.4cqi;
+  background: var(--ouro); color: var(--breu); font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  clip-path: polygon(1.6cqi 0, 100% 0, calc(100% - 1.6cqi) 100%, 0 100%);
+}
+.carta__rotulo { font-weight: 600; margin-right: .35em; }
+.carta__valor { font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* brilho holográfico + reflexo (posição definida pelo mouse) */
+.carta__brilho {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; border-radius: inherit; overflow: hidden;
+  background:
+    radial-gradient(circle at var(--mx, 50%) var(--my, 30%), rgba(255, 255, 255, .5), transparent 40%),
+    linear-gradient(115deg, transparent 20%, rgba(255, 60, 120, .45) 36%, rgba(255, 220, 80, .5) 46%, rgba(255, 140, 60, .45) 56%, rgba(255, 255, 255, .35) 66%, transparent 80%)
+      calc(var(--mx, 50%) * 1.4 - 20%) 0 / 260% 100% no-repeat;
+  mix-blend-mode: color-dodge; opacity: 0; transition: opacity .35s;
+}
+.carta--ultra .carta__brilho { opacity: .4; }
+.carta__frente::before { /* luz que corre em volta da borda (carta principal sempre; as outras ao passar o mouse) */
+  content: ""; position: absolute; inset: 0; z-index: 4; pointer-events: none; border-radius: inherit; display: none;
+  padding: 1.1cqi;
+  background: conic-gradient(from var(--giro), transparent 0 58%, var(--ouro) 72%, #FFFFFF 78%, var(--ouro-claro) 83%, transparent 94%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.carta--mira .carta__brilho { opacity: .9; }
+.carta__brilho::after { /* reflexo que passa sozinho na carta principal */
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(110deg, transparent 38%, rgba(255, 255, 255, .7) 50%, transparent 62%);
+  transform: translateX(-130%);
+}
+
+/* verso: preto e vermelho com raios, anel dourado e o monograma */
+.carta__verso {
+  display: grid; place-items: center;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(226, 28, 52, .5) 0deg 3deg, transparent 3deg 12deg),
+    radial-gradient(circle, #E21C34 0%, #7A0715 45%, var(--breu) 80%);
+  box-shadow: inset 0 0 0 1.6cqi var(--breu), inset 0 0 0 2.3cqi var(--ouro), inset 0 0 0 3.4cqi var(--breu), inset 0 0 12cqi rgba(0, 0, 0, .85);
+}
+.verso__anel {
+  position: absolute; width: 60cqi; aspect-ratio: 1; border-radius: 50%;
+  border: 1.4cqi dashed var(--ouro);
+  box-shadow: 0 0 7cqi rgba(245, 185, 53, .55), inset 0 0 0 2.6cqi rgba(14, 6, 8, .85), inset 0 0 0 3.2cqi var(--ouro);
+  transition: box-shadow .4s;
+}
+.carta__verso::after { /* brilho que passa pelas cartas viradas, uma de cada vez */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 38%, rgba(255, 236, 200, .55) 50%, transparent 62%);
+  transform: translateX(-140%);
+}
+.verso__emblema {
+  position: relative; font: 400 15cqi/1 var(--titulo); color: var(--ouro-claro);
+  text-shadow: .06em .06em 0 var(--breu), 0 0 5cqi rgba(245, 185, 53, .8);
+}
+
+/* ---------- Deck (preto) ---------- */
+
+.deck {
+  position: relative; overflow: clip; isolation: isolate;
+  padding: calc(var(--respiro) + 1rem) var(--margem) var(--respiro);
+  background:
+    radial-gradient(70rem 30rem at 50% 0%, rgba(200, 16, 46, .3), transparent 70%),
+    repeating-linear-gradient(-45deg, rgba(200, 16, 46, .08) 0 2px, transparent 2px 24px),
+    var(--breu);
+}
+.deck::before, .deck::after { /* luzes vermelhas flutuando no fundo preto */
+  content: ""; position: absolute; z-index: -1; width: 46rem; aspect-ratio: 1; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(226, 28, 52, .32), transparent 65%);
+}
+.deck::before { left: -16rem; top: 18%; }
+.deck::after { right: -18rem; top: 58%; background: radial-gradient(circle, rgba(245, 185, 53, .16), transparent 65%); }
+.deck__cabeca { display: grid; gap: .75rem; margin-bottom: clamp(2.5rem, 6vw, 4.5rem); }
+.deck__titulo {
+  font: 400 clamp(3.4rem, 11vw, 10rem)/.9 var(--titulo); text-transform: uppercase;
+  color: var(--vermelho); text-shadow: .045em .045em 0 var(--ouro);
+}
+.letra-titulo { display: inline-block; }
+.deck__legenda { color: var(--rosado); max-width: 40rem; }
+.deck__vazio { font-size: 1.25rem; }
+.deck__vazio a { font-weight: 700; text-decoration-color: var(--vermelho); }
+
+.zona { margin-bottom: clamp(3.5rem, 8vw, 6.5rem); }
+.zona__cabeca {
+  --b1: #FF3A4E; --b2: #A80C24; --b-texto: var(--branco);
+  display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .5rem clamp(1rem, 2.5vw, 2rem);
+  padding: clamp(.8rem, 1.6vw, 1.1rem) clamp(1.6rem, 3vw, 2.6rem) clamp(.8rem, 1.6vw, 1.1rem) clamp(.8rem, 1.6vw, 1.1rem);
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+  background: linear-gradient(100deg, var(--b1), var(--b2));
+  clip-path: polygon(0 0, 100% 0, calc(100% - 1.6rem) 100%, 0 100%);
+  color: var(--b-texto);
+  position: relative;
+}
+.zona__cabeca::after { /* corte de luz que atravessa a faixa quando a zona aparece */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .7) 50%, transparent 70%);
+  transform: translateX(-120%);
+}
+.zona--onix .zona__cabeca   { --b1: #3D2A2E; --b2: #170A0D; }
+.zona--ouro .zona__cabeca   { --b1: #FFE08A; --b2: #D89A1E; --b-texto: var(--breu); }
+.zona--carmim .zona__cabeca { --b1: #B3213F; --b2: #5A0614; }
+.zona__num { padding: .45rem .7rem; background: var(--breu); color: var(--ouro); font: 400 clamp(1.6rem, 3.2vw, 2.6rem)/1 var(--titulo); }
+.zona__nome { font: 400 clamp(1.1rem, 2.2vw, 1.9rem)/1.12 var(--titulo); text-transform: uppercase; }
+.zona__descricao { font-size: .95rem; margin-top: .25rem; }
+.zona--ouro .selo, .zona--rubi .selo, .zona--carmim .selo { background: var(--breu); color: var(--ouro); }
+.zona__conta { padding: .35rem .85rem; border: 2px solid currentColor; font-weight: 700; font-size: .875rem; white-space: nowrap; transform: skewX(-12deg); }
+
+/* a mão: 3 cartas em leque */
+.mao { display: grid; grid-template-columns: repeat(3, minmax(0, 17.5rem)); justify-content: center; gap: clamp(1.25rem, 3vw, 3rem); }
+.slot { position: relative; display: grid; gap: .9rem; justify-items: center; transition: transform .5s var(--suave); }
+.slot:nth-child(3n + 1) { transform: rotate(-5deg) translateY(16px); }
+.slot:nth-child(3n) { transform: rotate(5deg) translateY(16px); }
+.slot:hover, .slot:focus-within { transform: translateY(-16px) scale(1.03); z-index: 2; }
+.slot__abrir { display: block; width: 100%; padding: 0; border: 0; background: none; color: inherit; font: inherit; text-align: left; cursor: pointer; }
+.slot .carta { filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .6)); transition: transform .5s var(--suave), filter .35s; }
+.slot__abrir:hover .carta, .slot__abrir:focus-visible .carta { filter: drop-shadow(0 0 18px rgba(255, 58, 78, .75)) drop-shadow(0 18px 22px rgba(0, 0, 0, .6)); }
+.slot--pendente:hover .verso__anel { box-shadow: 0 0 14cqi rgba(245, 185, 53, .95), inset 0 0 0 2.6cqi rgba(14, 6, 8, .85), inset 0 0 0 3.2cqi var(--ouro); }
+.slot--pendente:hover .carta { transform: perspective(1000px) rotateY(-14deg) rotateZ(-2deg); }
+.slot__legenda { text-align: center; font-size: .9rem; color: var(--rosado); line-height: 1.35; }
+.slot__estado { display: block; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--branco); }
+.slot__estado--ok { color: var(--ouro); }
+.slot--erro .slot__estado { color: #FF8A96; }
+
+/* ---------- Contato (vermelho) ---------- */
+
+.contato {
+  position: relative; overflow: clip; isolation: isolate;
+  display: grid; grid-template-columns: minmax(0, 21rem) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 6vw, 6rem);
+  padding: calc(var(--respiro) + 1rem) var(--margem) var(--respiro);
+  background: radial-gradient(circle at 22% 50%, #FF3A4E, #C8102E 40%, #5A0410 100%);
+}
+.contato__raios {
+  position: absolute; left: 22%; top: 50%; z-index: -1; width: 220vmax; height: 220vmax; translate: -50% -50%;
+  background: repeating-conic-gradient(from 0deg, rgba(255, 240, 220, .14) 0deg .7deg, transparent .7deg 5deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 0 8%, #000 24%, #000 50%, transparent 70%);
+          mask-image: radial-gradient(circle, transparent 0 8%, #000 24%, #000 50%, transparent 70%);
+}
+.contato__carta { filter: drop-shadow(0 26px 34px rgba(40, 0, 5, .6)); }
+.contato__texto { display: grid; gap: 1.4rem; justify-items: start; min-width: 0; }
+.contato__rotulo {
+  padding: .5rem 1.4rem .5rem 1rem; background: var(--breu); color: var(--ouro);
+  font-weight: 700; font-size: .9rem; line-height: 1; letter-spacing: .14em; text-transform: uppercase;
+  clip-path: polygon(0 0, 100% 0, calc(100% - .8rem) 100%, 0 100%);
+}
+.contato__email {
+  display: block; max-width: 100%;
+  font: italic 700 clamp(2rem, 5.4vw, 5rem)/1.02 var(--ui); color: var(--branco);
+  text-shadow: .05em .05em 0 var(--breu);
+  text-decoration: underline; text-decoration-color: var(--breu); text-decoration-thickness: .07em; text-underline-offset: .14em;
+  overflow-wrap: anywhere; transition: color .25s;
+}
+.contato__email:hover { color: var(--ouro-claro); }
+.contato__email-parte { display: inline-block; white-space: nowrap; } /* letras separadas não quebram linha no meio */
+.letra-email { display: inline-block; }
+.contato__acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+.contato__aviso { font-weight: 700; min-height: 1.6em; }
+.contato__redes { display: flex; flex-wrap: wrap; gap: .5rem 1.75rem; }
+.contato__redes a { font-weight: 700; text-underline-offset: .25em; }
+
+.rodape {
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  padding: 1.5rem var(--margem) 2rem; background: var(--breu); border-top: 3px solid var(--vermelho);
+  font-size: .875rem; color: var(--rosado);
+}
+.rodape a { text-underline-offset: .25em; }
+
+.faiscas { position: fixed; inset: 0; z-index: 70; width: 100vw; height: 100vh; pointer-events: none; }
+
+/* ---------- Player ---------- */
+
+.player {
+  width: min(100vw - 2 * var(--margem), 76rem); max-width: none; max-height: calc(100svh - 2rem);
+  padding: 0; border: 3px solid var(--vermelho); background: #000; color: var(--branco); overflow: auto;
+  box-shadow: 0 0 0 3px var(--breu), 0 0 60px rgba(226, 28, 52, .5);
+}
+.player:has(.player__tela--vertical), .player:has(.player__tela--quadrado) { width: fit-content; }
+.player::backdrop { background: rgba(14, 6, 8, .92); }
+.com-player body { overflow: hidden; }
+.player__barra { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .75rem 1rem; background: var(--vermelho); }
+.player__titulo { font: 400 1.1rem/1.2 var(--titulo); text-transform: uppercase; }
+.player__fechar { padding: .5rem 1rem; border: 2px solid var(--branco); background: var(--breu); color: inherit; font: inherit; font-weight: 700; text-transform: uppercase; cursor: pointer; }
+.player__fechar:hover { background: #2A0C11; }
+.player__tela { position: relative; aspect-ratio: 16 / 9; width: 100%; background: #000; }
+.player__tela--vertical { aspect-ratio: 9 / 16; width: auto; height: min(78svh, 56rem); margin-inline: auto; max-width: 100%; }
+.player__tela--quadrado { aspect-ratio: 1; width: auto; height: min(78svh, 50rem); margin-inline: auto; max-width: 100%; }
+.player__tela video, .player__tela iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: contain; }
+.player__erro { position: absolute; inset: 0; display: grid; place-items: center; padding: 2rem; text-align: center; color: var(--rosado); }
+.player__info { display: grid; gap: .5rem; padding: 1rem 1rem 1.25rem; max-width: 46rem; }
+.player__meta { color: var(--rosado); font-size: .875rem; }
+.player__link { font-weight: 700; text-decoration-color: var(--vermelho); text-underline-offset: .25em; }
+
+/* =========================================================
+   Movimento — tudo aqui dentro some com "reduzir movimento"
+   ========================================================= */
+
+@media (prefers-reduced-motion: no-preference) {
+  /* entrada, em sequência: raios → etiqueta → nome (impacto + tremor) → carta girando → clarão + ondas → texto */
+  .pronto .arena__raios { animation: raios-entrar .9s var(--suave) both, girar 90s linear infinite; }
+  .pronto .arena__etiqueta { animation: deslizar .6s var(--suave) .15s both; }
+  .pronto .arena__nome .palavra { animation: impacto .55s var(--golpe) both; animation-delay: calc(.28s + var(--i) * .16s); }
+  .pronto .arena__texto, .pronto .arena__mesa { animation: tremer .4s linear .78s; }
+  .pronto .carta-heroi { animation: surgir 1.25s var(--golpe) .45s both, flutuar 5s ease-in-out 2.2s infinite; }
+  .pronto .carta-heroi .carta__miolo { animation: rodopio 1.25s var(--golpe) .45s both; }
+  .pronto .arena__clarao { animation: clarao .8s ease-out 1.55s both; }
+  .pronto .anel { animation: acender .8s var(--suave) 1.5s both; }
+  .anel__marcas { animation: girar 30s linear infinite; }
+  .anel__dentro { animation: girar 46s linear infinite reverse; }
+  .pronto .onda { animation: onda 1s ease-out 1.6s both; }
+  .pronto .onda--2 { animation-delay: 1.8s; }
+  .pronto .arena__apresentacao { animation: deslizar .7s var(--suave) .95s both; }
+  .pronto .arena__acoes { animation: deslizar .7s var(--suave) 1.08s both; }
+  .pronto .arena__ferramentas { animation: deslizar .7s var(--suave) 1.2s both; }
+  .carta--ultra .carta__titulo { animation: folha 4s ease-in-out infinite; }
+  .carta--ultra .carta__brilho::after { animation: reflexo 4.5s ease-in-out 2.6s infinite; }
+
+  .fita__trilho { animation: correr 32s linear infinite; }
+  .fita__trilho--reverso { animation-direction: reverse; animation-duration: 40s; }
+  .slot--pendente .verso__anel { animation: girar 16s linear infinite; }
+  .botao:hover::after { transform: translateX(120%); transition: transform .6s var(--suave); }
+
+  /* revelar ao rolar (a classe .revela só é ligada pelo JS); o conteúdo nunca fica invisível, só desliza */
+  .revela .letra-titulo { transition: transform .8s var(--mola); transition-delay: calc(var(--i) * 70ms); }
+  .revela .deck__cabeca:not(.visivel) .letra-titulo { transform: translateY(-.5em) rotate(-14deg) scale(1.25); }
+  .revela .zona__cabeca { transition: transform .8s var(--suave); }
+  .revela .zona:not(.visivel) .zona__cabeca { transform: translateX(-90px); }
+  /* as cartas são distribuídas: vêm voando da direita, girando, e as de vídeo se viram */
+  .revela .zona .slot { transition: transform 1s var(--mola); transition-delay: calc(.15s + var(--i, 0) * 130ms); }
+  .revela .zona:not(.visivel) .slot { transform: translate(180px, -60px) rotate(30deg); }
+  .revela .zona .slot__abrir .carta__miolo { transition-delay: calc(.45s + var(--i, 0) * 130ms); }
+  .revela .zona:not(.visivel) .slot__abrir .carta__miolo { transform: rotateY(180deg); }
+  .revela .contato__carta, .revela .contato__texto { transition: transform 1s var(--mola); }
+  .revela .contato__carta:not(.visivel) { transform: translateX(-70px) rotate(-12deg); }
+  .revela .contato__texto:not(.visivel) { transform: translateX(50px); }
+
+  /* ao abrir um vídeo, a carta é "invocada" */
+  .carta--invocada { animation: invocada .45s ease-out; }
+
+  /* carta principal viva: aura girando, luz correndo na borda e balanço em 3D com o holográfico mudando */
+  .pronto .carta-heroi::before { display: block; animation: giro-aura 5s linear infinite, aparecer-aura 1s ease-out 1.6s both; }
+  .carta--ultra .carta__frente::before { display: block; animation: giro-aura 3.2s linear infinite; }
+  .slot__abrir:hover .carta__frente::before, .slot__abrir:focus-visible .carta__frente::before { display: block; animation: giro-aura 1.6s linear infinite; }
+  .pronto .carta--ultra:not(.carta--mira) { animation: balanco 9s ease-in-out 2.6s infinite; }
+
+  /* nome: brilho atravessando as letras e, de vez em quando, uma falha digital */
+  .arena__nome .palavra::after {
+    display: block; color: transparent;
+    background: linear-gradient(105deg, transparent 40%, rgba(255, 255, 255, .95) 50%, transparent 60%) -200% 0 / 200% 100% no-repeat;
+    -webkit-background-clip: text; background-clip: text;
+    animation: brilho-nome 5s ease-in-out 2.2s infinite;
+  }
+  .arena__nome .palavra::before { display: block; color: var(--ouro); opacity: 0; animation: falha 7s steps(1) 3s infinite; }
+  .arena__nome .palavra + .palavra::before { color: #FF2D55; animation-delay: 3.08s; }
+
+  /* faixas das categorias: corte de luz ao aparecer */
+  .zona.visivel .zona__cabeca::after { animation: corte-luz .9s var(--suave) .35s; }
+
+  /* cartas viradas: um brilho passa por elas em sequência; ao tocar, a carta treme */
+  .carta--virada .carta__verso::after { animation: brilho-verso 6s ease-in-out infinite; animation-delay: calc(1s + var(--i, 0) * .5s); }
+  .carta--sacode { animation: sacode .5s ease-out; }
+
+  /* luzes do fundo do deck flutuando */
+  .deck::before { animation: deriva 16s ease-in-out infinite alternate; }
+  .deck::after { animation: deriva 20s ease-in-out infinite alternate-reverse; }
+
+  /* letras do e-mail ondulam ao passar o mouse */
+  .contato__email:hover .letra-email { animation: onda-letra .6s ease-out; animation-delay: calc(var(--i) * 25ms); }
+
+  /* granulação de filme tremendo (só em telas grandes, para poupar o celular) */
+  @media (min-width: 721px) { body::after { animation: grao .5s steps(4) infinite; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .carta, .slot, .slot--pendente:hover .carta, .botao:hover { transform: none !important; transition: none; }
+  .botao { transform: none; } .botao > span { transform: none; }
+  .arena__clarao, .onda { display: none; }
+}
+
+@keyframes raios-entrar { from { opacity: 0; scale: 1.7; } to { opacity: 1; scale: 1; } }
+@keyframes girar { to { transform: rotate(360deg); } }
+@keyframes deslizar { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: none; } }
+@keyframes impacto {
+  0%   { opacity: 0; transform: scale(2.6) rotate(-4deg); filter: blur(10px); }
+  60%  { opacity: 1; transform: scale(.94) rotate(0); filter: blur(0); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes tremer {
+  0%, 100% { translate: 0 0; } 15% { translate: -9px 5px; } 30% { translate: 8px -6px; } 45% { translate: -6px 3px; }
+  60% { translate: 5px -3px; } 75% { translate: -3px 2px; } 90% { translate: 2px -1px; }
+}
+@keyframes surgir { from { opacity: 0; transform: translateY(80px) scale(.2); } 70% { opacity: 1; } to { opacity: 1; transform: none; } }
+@keyframes rodopio { from { transform: rotateY(-1260deg); } to { transform: rotateY(0); } }
+@keyframes flutuar { 50% { translate: 0 -14px; } }
+@keyframes clarao { 0% { opacity: 0; } 18% { opacity: .85; } 100% { opacity: 0; } }
+@keyframes acender { from { opacity: 0; scale: .5; } to { opacity: 1; scale: 1; } }
+@keyframes onda { 0% { opacity: .95; scale: .4; } 100% { opacity: 0; scale: 2.4; } }
+@keyframes folha { 50% { background-position: 100% 0; } }
+@keyframes reflexo { 0%, 55% { transform: translateX(-130%); } 100% { transform: translateX(130%); } }
+@keyframes correr { to { transform: translateX(-50%); } }
+@keyframes giro-aura { to { --giro: 360deg; } }
+@keyframes aparecer-aura { from { opacity: 0; } to { opacity: .9; } }
+@keyframes balanco {
+  0%, 100% { --rx: 0deg; --ry: 0deg; --mx: 50%; --my: 30%; }
+  25% { --rx: 5deg; --ry: -11deg; --mx: 15%; --my: 15%; }
+  75% { --rx: -4deg; --ry: 11deg; --mx: 85%; --my: 60%; }
+}
+@keyframes brilho-nome { 0%, 60% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+@keyframes falha {
+  0%   { opacity: 0; transform: none; clip-path: none; }
+  92%  { opacity: .9; transform: translate(-.04em, .02em); clip-path: inset(10% 0 55% 0); }
+  94%  { opacity: .9; transform: translate(.05em, -.02em); clip-path: inset(58% 0 12% 0); }
+  96%  { opacity: .9; transform: translate(-.03em, 0); clip-path: inset(30% 0 40% 0); }
+  98%  { opacity: 0; transform: none; clip-path: none; }
+}
+@keyframes corte-luz { from { transform: translateX(-120%); } to { transform: translateX(120%); } }
+@keyframes brilho-verso { 0%, 70% { transform: translateX(-140%); } 100% { transform: translateX(140%); } }
+@keyframes sacode { 0%, 100% { rotate: 0deg; } 20% { rotate: -6deg; } 40% { rotate: 5deg; } 60% { rotate: -3deg; } 80% { rotate: 2deg; } }
+@keyframes deriva { from { transform: translate(0, 0) scale(1); } to { transform: translate(14rem, -8rem) scale(1.25); } }
+@keyframes onda-letra { 0%, 100% { transform: none; } 40% { transform: translateY(-.18em) rotate(-4deg); color: var(--ouro-claro); } }
+@keyframes grao { 0% { transform: translate(0, 0); } 25% { transform: translate(-3%, 2%); } 50% { transform: translate(2%, -3%); } 75% { transform: translate(-2%, -2%); } }
+@keyframes invocada { 0% { scale: 1; filter: brightness(1); } 40% { scale: 1.08; filter: brightness(1.9) saturate(1.3); } 100% { scale: 1; filter: brightness(1); } }
+
+/* ---------- Tablet e celular ---------- */
+
+@media (max-width: 900px) {
+  .arena { grid-template-columns: minmax(0, 1fr); min-height: 0; padding-top: 6rem; }
+  .arena__raios { left: 50%; top: 72%; }
+  .arena__clarao { background: radial-gradient(circle at 50% 72%, rgba(255, 244, 214, .9), rgba(255, 200, 120, .55) 30%, rgba(226, 28, 52, 0) 70%); }
+  .arena__mesa { min-height: 0; padding-block: 2.5rem 1rem; }
+  .carta-heroi { width: min(88vw, 340px); }
+  .anel { width: min(120vw, 34rem); }
+  .onda { width: 16rem; }
+  .contato { grid-template-columns: minmax(0, 1fr); }
+  .contato__raios { left: 50%; top: 30%; }
+  .contato__carta { width: min(80vw, 320px); justify-self: center; }
+}
+
+@media (max-width: 720px) {
+  body { font-size: 1rem; }
+  .topo__marca { display: none; }
+  .topo__nav { width: 100%; justify-content: space-between; margin-left: 0; }
+  .arena__nome { font-size: 13vw; }
+  .zona__cabeca { grid-template-columns: auto minmax(0, 1fr); clip-path: polygon(0 0, 100% 0, calc(100% - 1rem) 100%, 0 100%); padding-right: 1.6rem; }
+  .zona__conta { grid-column: 1 / -1; justify-self: start; margin-left: .3rem; }
+
+  /* a mão vira uma fileira com rolagem lateral; a próxima carta fica à mostra */
+  .mao {
+    display: flex; gap: 1rem; justify-content: flex-start;
+    overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+    margin-inline: calc(-1 * var(--margem)); padding: 1.5rem var(--margem) 1rem;
+    scroll-padding-inline: var(--margem);
+  }
+  .slot { flex: 0 0 min(68vw, 16rem); scroll-snap-align: start; }
+  .slot:nth-child(n) { transform: none; }
+}
