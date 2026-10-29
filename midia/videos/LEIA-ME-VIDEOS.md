@@ -1,67 +1,30 @@
-# Como adicionar seus vídeos
+# Como adicionar vídeos
 
-São 4 categorias × 3 vídeos, todas em `site/conteudo.js`. Cada projeto tem esta forma:
+**Cada pasta aqui é uma categoria do site**, com o nome da pasta. Os vídeos dentro dela viram os cards.
 
-```js
-{ titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null }
-```
-
-## Opção A: arquivo local (este diretório)
-
-1. Coloque o arquivo aqui: `site/midia/videos/` (ex.: `reels-marca-x.mp4`).
-2. No projeto, troque `video: null` por:
-   ```js
-   video: { arquivo: "midia/videos/reels-marca-x.mp4" }
+1. Crie uma pasta com o nome da categoria (ou use uma existente) e coloque os vídeos (`.mov`, `.mp4`…).
+2. A partir da pasta `03-projeto/`, rode:
    ```
-3. Formato do arquivo: **MP4 (H.264 + AAC)**, que toca em qualquer navegador. Para a web: 1080p, entre 5 e 8 Mbps, idealmente até ~30 MB por vídeo.
-4. Sem capa, a miniatura é o quadro do 1º segundo do vídeo.
+   python ferramentas/converter-videos.py     (converte só os vídeos novos para a web + gera as capas)
+   python ferramentas/montar-categorias.py    (atualiza as categorias no conteudo.js)
+   ```
+3. Publique: `cd site`, `git add -A`, `git commit -m "Novos vídeos"`, `git push`.
 
-## Opção B: YouTube ou Vimeo (recomendado para vídeos longos ou pesados)
+Os **originais ficam só no computador** (o `.gitignore` impede que subam). Vão para o site as versões
+convertidas em `web/`: MP4 H.264, até 1080p, no máximo ~50 MB cada (o GitHub recusa arquivos acima de 100 MB).
 
-```js
-video: { link: "https://www.youtube.com/watch?v=XXXXXXXXXXX" }
-video: { link: "https://youtu.be/XXXXXXXXXXX" }
-video: { link: "https://www.youtube.com/shorts/XXXXXXXXXXX" }
-video: { link: "https://vimeo.com/123456789" }
-```
-O player do YouTube/Vimeo só é carregado quando a pessoa clica em "Assistir".
-Sem capa, YouTube usa a miniatura do próprio vídeo; Vimeo mostra o título como cartela.
+## Títulos, clientes e descrições
 
-## Opção C: outro site (Instagram, Drive, Behance…)
+Edite em `site/conteudo.js`, em cada projeto (`titulo`, `cliente`, `ano`, `descricao`).
+Rodar `montar-categorias.py` de novo **mantém** o que você escreveu. Sem título, o card mostra
+a categoria, o formato e a duração do vídeo.
 
-```js
-video: { link: "https://www.instagram.com/reel/..." }
-```
-O card vira um link que abre o vídeo em nova aba.
+## Grafia dos nomes
 
-## Capa (opcional, recomendada)
+Para o site mostrar um nome diferente do nome da pasta (acentos, maiúsculas), edite `NOMES` no
+início de `ferramentas/montar-categorias.py`.
 
-Coloque a imagem em `site/midia/capas/` e informe:
-```js
-capa: "midia/capas/reels-marca-x.jpg"
-```
-JPG ou WebP, com a mesma proporção do vídeo, até ~1600 px de largura e ~250 KB.
+## Links do YouTube/Vimeo (opcional)
 
-## Formato
-
-`formato: "horizontal"` (16:9), `"vertical"` (9:16) ou `"quadrado"` (1:1).
-O layout se ajusta sozinho: não é preciso mexer em HTML ou CSS.
-
-## Exemplo completo
-
-```js
-{
-  titulo: "Lançamento da coleção de verão",
-  cliente: "Nome do cliente",
-  ano: "2026",
-  descricao: "Edição e motion para a campanha de lançamento.",
-  formato: "vertical",
-  capa: "midia/capas/verao.jpg",
-  video: { arquivo: "midia/videos/verao.mp4" }
-}
-```
-
-## Se algo der errado
-
-- Nome do arquivo errado ou arquivo ausente: o card mostra "Vídeo indisponível" com o caminho que faltou (enquanto `marcarProvisorios: true`) e some quando as marcações estão desligadas. Nunca aparece player quebrado.
-- Use só vídeos que você fez e tem direito de mostrar.
+Em vez de arquivo, um projeto pode usar `video: { link: "https://youtu.be/..." }` no `conteudo.js`.
+Use só vídeos que você fez e tem direito de mostrar.
