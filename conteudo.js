@@ -85,9 +85,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 37.9,
-          "capa": "midia/videos/web/esportes/1.jpg",
+          "capa": "midia/videos/web/esportes/video-pronto-1.jpg",
           "video": {
-            "arquivo": "midia/videos/web/esportes/1.mp4"
+            "arquivo": "midia/videos/web/esportes/video-pronto-1.mp4"
           }
         },
         {
@@ -97,9 +97,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 51.7,
-          "capa": "midia/videos/web/esportes/2.jpg",
+          "capa": "midia/videos/web/esportes/video-pronto.jpg",
           "video": {
-            "arquivo": "midia/videos/web/esportes/2.mp4"
+            "arquivo": "midia/videos/web/esportes/video-pronto.mp4"
           }
         },
         {
@@ -109,9 +109,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 47.1,
-          "capa": "midia/videos/web/esportes/3.jpg",
+          "capa": "midia/videos/web/esportes/video-pronto-hybrid-v2.jpg",
           "video": {
-            "arquivo": "midia/videos/web/esportes/3.mp4"
+            "arquivo": "midia/videos/web/esportes/video-pronto-hybrid-v2.mp4"
           }
         }
       ]
@@ -127,10 +127,10 @@ window.CONTEUDO = {
           "ano": "",
           "descricao": "",
           "formato": "vertical",
-          "duracao": 64.8,
-          "capa": "midia/videos/web/imobiliario/1.jpg",
+          "duracao": 98.8,
+          "capa": "midia/videos/web/imobiliario/video-bruno.jpg",
           "video": {
-            "arquivo": "midia/videos/web/imobiliario/1.mp4"
+            "arquivo": "midia/videos/web/imobiliario/video-bruno.mp4"
           }
         },
         {
@@ -139,10 +139,10 @@ window.CONTEUDO = {
           "ano": "",
           "descricao": "",
           "formato": "vertical",
-          "duracao": 62.4,
-          "capa": "midia/videos/web/imobiliario/2.jpg",
+          "duracao": 64.8,
+          "capa": "midia/videos/web/imobiliario/video-pronto-1-erincheira.jpg",
           "video": {
-            "arquivo": "midia/videos/web/imobiliario/2.mp4"
+            "arquivo": "midia/videos/web/imobiliario/video-pronto-1-erincheira.mp4"
           }
         },
         {
@@ -152,9 +152,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 68.2,
-          "capa": "midia/videos/web/imobiliario/3.jpg",
+          "capa": "midia/videos/web/imobiliario/video-pronto-3.jpg",
           "video": {
-            "arquivo": "midia/videos/web/imobiliario/3.mp4"
+            "arquivo": "midia/videos/web/imobiliario/video-pronto-3.mp4"
           }
         },
         {
@@ -164,9 +164,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 60.9,
-          "capa": "midia/videos/web/imobiliario/4.jpg",
+          "capa": "midia/videos/web/imobiliario/video-pronto.jpg",
           "video": {
-            "arquivo": "midia/videos/web/imobiliario/4.mp4"
+            "arquivo": "midia/videos/web/imobiliario/video-pronto.mp4"
           }
         },
         {
@@ -176,9 +176,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 101.7,
-          "capa": "midia/videos/web/imobiliario/5.jpg",
+          "capa": "midia/videos/web/imobiliario/video-pronto2.jpg",
           "video": {
-            "arquivo": "midia/videos/web/imobiliario/5.mp4"
+            "arquivo": "midia/videos/web/imobiliario/video-pronto2.mp4"
           }
         }
       ]
@@ -195,9 +195,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 24.0,
-          "capa": "midia/videos/web/restaurantes/1.jpg",
+          "capa": "midia/videos/web/restaurantes/saveinta-com-aqmskep81pbubuvt-cy4-kqu6vdmb0hvibi.jpg",
           "video": {
-            "arquivo": "midia/videos/web/restaurantes/1.mp4"
+            "arquivo": "midia/videos/web/restaurantes/saveinta-com-aqmskep81pbubuvt-cy4-kqu6vdmb0hvibi.mp4"
           }
         },
         {
@@ -207,9 +207,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 17.7,
-          "capa": "midia/videos/web/restaurantes/2.jpg",
+          "capa": "midia/videos/web/restaurantes/saveinta-com-aqnlwawj37knkb5j-ubzalpevolhlt0f82z.jpg",
           "video": {
-            "arquivo": "midia/videos/web/restaurantes/2.mp4"
+            "arquivo": "midia/videos/web/restaurantes/saveinta-com-aqnlwawj37knkb5j-ubzalpevolhlt0f82z.mp4"
           }
         }
       ]
@@ -226,9 +226,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 60.6,
-          "capa": "midia/videos/web/salao-e-barbearia/1.jpg",
+          "capa": "midia/videos/web/salao-e-barbearia/video-pronto-salao-2.jpg",
           "video": {
-            "arquivo": "midia/videos/web/salao-e-barbearia/1.mp4"
+            "arquivo": "midia/videos/web/salao-e-barbearia/video-pronto-salao-2.mp4"
           }
         },
         {
@@ -238,9 +238,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 60.8,
-          "capa": "midia/videos/web/salao-e-barbearia/2.jpg",
+          "capa": "midia/videos/web/salao-e-barbearia/video-pronto-salao-3.jpg",
           "video": {
-            "arquivo": "midia/videos/web/salao-e-barbearia/2.mp4"
+            "arquivo": "midia/videos/web/salao-e-barbearia/video-pronto-salao-3.mp4"
           }
         },
         {
@@ -250,9 +250,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "horizontal",
           "duracao": 64.9,
-          "capa": "midia/videos/web/salao-e-barbearia/3.jpg",
+          "capa": "midia/videos/web/salao-e-barbearia/video-pronto-salao.jpg",
           "video": {
-            "arquivo": "midia/videos/web/salao-e-barbearia/3.mp4"
+            "arquivo": "midia/videos/web/salao-e-barbearia/video-pronto-salao.mp4"
           }
         }
       ]
@@ -269,9 +269,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 24.2,
-          "capa": "midia/videos/web/talk-head/1.jpg",
+          "capa": "midia/videos/web/talk-head/criativo-3.jpg",
           "video": {
-            "arquivo": "midia/videos/web/talk-head/1.mp4"
+            "arquivo": "midia/videos/web/talk-head/criativo-3.mp4"
           }
         },
         {
@@ -281,9 +281,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 23.1,
-          "capa": "midia/videos/web/talk-head/2.jpg",
+          "capa": "midia/videos/web/talk-head/criativo-pronto-2.jpg",
           "video": {
-            "arquivo": "midia/videos/web/talk-head/2.mp4"
+            "arquivo": "midia/videos/web/talk-head/criativo-pronto-2.mp4"
           }
         },
         {
@@ -293,9 +293,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 45.0,
-          "capa": "midia/videos/web/talk-head/3.jpg",
+          "capa": "midia/videos/web/talk-head/criativo-pronto-4.jpg",
           "video": {
-            "arquivo": "midia/videos/web/talk-head/3.mp4"
+            "arquivo": "midia/videos/web/talk-head/criativo-pronto-4.mp4"
           }
         },
         {
@@ -305,9 +305,9 @@ window.CONTEUDO = {
           "descricao": "",
           "formato": "vertical",
           "duracao": 35.2,
-          "capa": "midia/videos/web/talk-head/4.jpg",
+          "capa": "midia/videos/web/talk-head/criativo-pronto-5.jpg",
           "video": {
-            "arquivo": "midia/videos/web/talk-head/4.mp4"
+            "arquivo": "midia/videos/web/talk-head/criativo-pronto-5.mp4"
           }
         }
       ]
