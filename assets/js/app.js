@@ -135,8 +135,20 @@
     ]);
   }
 
+  // 64.8 -> "1:05"
+  function duracao(seg) {
+    if (!seg) return "";
+    var s = Math.round(seg);
+    return Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60);
+  }
+
+  var FORMATOS = { horizontal: "Horizontal", vertical: "Vertical", quadrado: "Quadrado" };
+
   function meta(p) {
+    // sem cliente/ano cadastrados, mostra o que se sabe do próprio vídeo: formato e duração
     var partes = [p.cliente, p.ano].filter(Boolean);
+    if (!partes.length && p.duracao) partes = [FORMATOS[p.formato] || FORMATOS.horizontal, duracao(p.duracao)];
+    else if (p.duracao) partes.push(duracao(p.duracao));
     return partes.length ? el("p", { class: "card__meta", text: partes.join(", ") }) : null;
   }
 
@@ -191,10 +203,17 @@
         previa.classList.add("tocando");
         var t = previa.play(); if (t && t.catch) t.catch(function () {});
       });
-      abrir.addEventListener("pointerleave", function () {
+      // ao sair (ou ao abrir o player), a prévia é descartada e o download dela cancelado:
+      // vídeos pausados continuam baixando e, somados, travam a fila do navegador
+      function pararPrevia() {
         if (!previa) return;
         previa.pause(); previa.classList.remove("tocando");
-      });
+        if (previa.classList.contains("card__previa")) {
+          previa.removeAttribute("src"); previa.load(); previa.remove(); previa = null;
+        }
+      }
+      abrir.addEventListener("pointerleave", pararPrevia);
+      abrir.addEventListener("click", pararPrevia);
     }
 
     // Vídeo local com capa: confere se o arquivo existe sem baixá-lo inteiro

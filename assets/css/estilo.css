@@ -347,6 +347,7 @@ a { color: inherit; }
   display: grid; gap: clamp(1rem, 2vw, 1.75rem) clamp(.75rem, 1.6vw, 1.5rem);
   grid-template-columns: repeat(6, minmax(0, 1fr));
   align-items: start;
+  grid-auto-flow: row dense; /* formatos misturados: cada vídeo ocupa o primeiro espaço livre, sem buracos */
 }
 .card--vertical, .card--quadrado { grid-column: span 2; }
 .card--horizontal { grid-column: span 3; }

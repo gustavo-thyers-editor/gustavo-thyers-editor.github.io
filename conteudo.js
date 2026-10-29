@@ -70,46 +70,246 @@ window.CONTEUDO = {
     tipoHeroi: "Editor de vídeo / Motion designer / Colorista"
   },
 
-  // 4 categorias × 3 projetos. Os nomes das categorias são provisórios: renomeie à vontade.
+  // Uma categoria por pasta em midia/videos/ (gerado por ferramentas/montar-categorias.py).
+  // Pode editar títulos, clientes, anos e descrições aqui: rodar o script de novo mantém o que você escreveu.
   categorias: [
     {
-      id: "redes",
-      nome: "Reels e conteúdo para redes",
-      descricao: { texto: "Vídeos curtos e verticais para Instagram, TikTok e Shorts.", provisorio: true },
-      projetos: [
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "vertical", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "vertical", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "vertical", capa: "", video: null }
+      "id": "esportes",
+      "nome": "Esportes",
+      "descricao": "",
+      "projetos": [
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 37.9,
+          "capa": "midia/videos/web/esportes/1.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/esportes/1.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 51.7,
+          "capa": "midia/videos/web/esportes/2.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/esportes/2.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 47.1,
+          "capa": "midia/videos/web/esportes/3.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/esportes/3.mp4"
+          }
+        }
       ]
     },
     {
-      id: "publicidade",
-      nome: "Publicidade e campanhas",
-      descricao: { texto: "Peças comerciais e vídeos de campanha para marcas.", provisorio: true },
-      projetos: [
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null }
+      "id": "imobiliario",
+      "nome": "Imobiliário",
+      "descricao": "",
+      "projetos": [
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 64.8,
+          "capa": "midia/videos/web/imobiliario/1.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/imobiliario/1.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 62.4,
+          "capa": "midia/videos/web/imobiliario/2.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/imobiliario/2.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 68.2,
+          "capa": "midia/videos/web/imobiliario/3.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/imobiliario/3.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 60.9,
+          "capa": "midia/videos/web/imobiliario/4.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/imobiliario/4.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 101.7,
+          "capa": "midia/videos/web/imobiliario/5.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/imobiliario/5.mp4"
+          }
+        }
       ]
     },
     {
-      id: "motion",
-      nome: "Motion design",
-      descricao: { texto: "Animação de tipografia, vinhetas e elementos gráficos.", provisorio: true },
-      projetos: [
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null }
+      "id": "restaurantes",
+      "nome": "Restaurantes",
+      "descricao": "",
+      "projetos": [
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 24.0,
+          "capa": "midia/videos/web/restaurantes/1.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/restaurantes/1.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 17.7,
+          "capa": "midia/videos/web/restaurantes/2.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/restaurantes/2.mp4"
+          }
+        }
       ]
     },
     {
-      id: "eventos",
-      nome: "Eventos e aftermovies",
-      descricao: { texto: "Cobertura e montagem de eventos, shows e bastidores.", provisorio: true },
-      projetos: [
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null },
-        { titulo: "", cliente: "", ano: "", descricao: "", formato: "horizontal", capa: "", video: null }
+      "id": "salao-e-barbearia",
+      "nome": "Salão e barbearia",
+      "descricao": "",
+      "projetos": [
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 60.6,
+          "capa": "midia/videos/web/salao-e-barbearia/1.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/salao-e-barbearia/1.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 60.8,
+          "capa": "midia/videos/web/salao-e-barbearia/2.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/salao-e-barbearia/2.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 64.9,
+          "capa": "midia/videos/web/salao-e-barbearia/3.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/salao-e-barbearia/3.mp4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "talk-head",
+      "nome": "Talk Head",
+      "descricao": "",
+      "projetos": [
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 24.2,
+          "capa": "midia/videos/web/talk-head/1.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/talk-head/1.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 23.1,
+          "capa": "midia/videos/web/talk-head/2.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/talk-head/2.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 45.0,
+          "capa": "midia/videos/web/talk-head/3.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/talk-head/3.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 35.2,
+          "capa": "midia/videos/web/talk-head/4.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/talk-head/4.mp4"
+          }
+        }
       ]
     }
   ]

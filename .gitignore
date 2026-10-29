@@ -1,0 +1,5 @@
+# Vídeos originais (pesados) ficam só no computador.
+# Vão para o site apenas as versões convertidas em midia/videos/web/ (ver ferramentas/converter-videos.py).
+midia/videos/*
+!midia/videos/LEIA-ME-VIDEOS.md
+!midia/videos/web/

@@ -226,6 +226,7 @@
     var stats = [];
     if (p.ano) stats.push(["Ano", p.ano]);
     stats.push(["Formato", FORMATOS[p.formato] || FORMATOS.horizontal]);
+    if (p.duracao) { var s = Math.round(p.duracao); stats.push(["Duração", Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60)]); }
 
     var c = carta({
       moldura: moldura, nome: titulo, linha: "[ " + cat.nome + " ]", arte: arte,
