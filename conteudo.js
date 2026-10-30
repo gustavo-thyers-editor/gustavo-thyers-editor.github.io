@@ -184,6 +184,49 @@ window.CONTEUDO = {
       ]
     },
     {
+      "id": "motion",
+      "nome": "Motion",
+      "descricao": "",
+      "projetos": [
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 9.6,
+          "capa": "midia/videos/web/motion/1.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/motion/1.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "vertical",
+          "duracao": 10.1,
+          "capa": "midia/videos/web/motion/ai-tasks-generator-concept-ui-ad.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/motion/ai-tasks-generator-concept-ui-ad.mp4"
+          }
+        },
+        {
+          "titulo": "",
+          "cliente": "",
+          "ano": "",
+          "descricao": "",
+          "formato": "horizontal",
+          "duracao": 11.1,
+          "capa": "midia/videos/web/motion/video.jpg",
+          "video": {
+            "arquivo": "midia/videos/web/motion/video.mp4"
+          }
+        }
+      ]
+    },
+    {
       "id": "restaurantes",
       "nome": "Restaurantes",
       "descricao": "",
